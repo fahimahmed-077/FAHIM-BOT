@@ -1,21 +1,40 @@
+const fs = require("fs-extra");
+const axios = require("axios");
+const path = require("path");
+
 module.exports = {
   config: {
     name: "rules",
-    version: "1.0.0",
-    author: "MR_FARHAN",
+    version: "1.3.1",
+    author: "Farhan-Khan",
     role: 0,
-    shortDescription: "Group Rules",
-    category: "group"
+    shortDescription: "rules information with image",
+    category: "Information",
+    guide: {
+      en: "rules"
+    }
   },
 
-  onStart: async function ({ api, event, message }) {
+  onStart: async function ({ api, event }) {
+    const cacheDir = path.join(__dirname, "cache");
+    const imgPath = path.join(cacheDir, "owner.jpg");
+
+    if (!fs.existsSync(cacheDir)) {
+      fs.mkdirSync(cacheDir, { recursive: true });
+    }
+
+    const imgLink = "https://i.imgur.com/zHivkUd.jpeg";
+
+    // group name safe fallback
+    let groupName = "GROUP RULES";
     try {
       const threadInfo = await api.getThreadInfo(event.threadID);
-      const groupName = threadInfo?.threadName || "Group";
+      groupName = threadInfo.threadName || "GROUP RULES";
+    } catch (e) {
+      groupName = "GROUP RULES";
+    }
 
-      const imageUrl = "https://i.imgur.com/zHivkUd.jpeg";
-
-      const rules = `‎╔═════════════════════╗
+    const ownerText = `‎╔═════════════════════╗
 ‎          ⚠️❌ 𝐑𝐔𝐋𝐄𝐒 𝐅𝐎𝐑 ❌⚠️
 ‎╚═════════════════════╝
 ‎                           👇👇
@@ -62,16 +81,37 @@ module.exports = {
 ‎           ∙──༅༎ 𝐂𝐑𝐄𝐀𝐓𝐎𝐑 ༎༅──∙
 ‎✦────────────────────✦`;
 
-      const stream = await global.utils.getStreamFromURL(imageUrl);
+    try {
+      const res = await axios({
+        url: imgLink,
+        responseType: "stream"
+      });
 
-      return message.reply({
-        body: rules,
-        attachment: [stream]
+      const writer = fs.createWriteStream(imgPath);
+      res.data.pipe(writer);
+
+      writer.on("finish", () => {
+        api.sendMessage(
+          {
+            body: ownerText,
+            attachment: fs.createReadStream(imgPath)
+          },
+          event.threadID,
+          () => {
+            try {
+              fs.unlinkSync(imgPath);
+            } catch (e) {}
+          },
+          event.messageID
+        );
+      });
+
+      writer.on("error", () => {
+        api.sendMessage(ownerText, event.threadID, event.messageID);
       });
 
     } catch (err) {
-      console.log("Rules command error:", err);
-      return message.reply("❌ Rules command failed to load.");
+      api.sendMessage(ownerText, event.threadID, event.messageID);
     }
   }
 };
