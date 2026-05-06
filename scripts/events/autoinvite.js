@@ -29,10 +29,13 @@ module.exports = {
       const boldName = userName.split("").map(c => boldMap[c] || c).join("");
 
       const form = {
-        body: `😹 ${boldName} tried to leave...  
-
-🚫 Not allowed here!  
-🔄 Added back 😇`
+        body: `-পলাইছে রে পলাইছে...!!😃
+‎⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
+      『 ${boldName} 』
+‎⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
+         -এই বলদ পলাইছে.!😹 
+-আমি বস『 𝐅𝐀𝐑𝐇𝐀𝐍 』এর বট থাকতে.!
+      -তুই পালাতে পারবি না-😂😹👈`
       };
 
       try {
