@@ -4,7 +4,7 @@ module.exports = {
   config: {
     name: "autoinvite",
     version: "2.5",
-    author: "Mohammad Akash",
+    author: "MR_FARHAN",
     category: "events"
   },
 
