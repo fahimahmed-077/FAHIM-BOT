@@ -1,147 +1,117 @@
-const axios = require("axios");
-const { getPrefix, getStreamFromURL } = global.utils;
-const { commands } = global.GoatBot;
-
-let xfont = null;
-let yfont = null;
-let categoryEmoji = null;
-
-const HELP_GIF = "https://files.catbox.moe/6touzq.mp4";
-
-async function loadResources() {
-  try {
-    const [x, y, c] = await Promise.all([
-      axios.get("https://raw.githubusercontent.com/Saim-x69x/sakura/main/xfont.json"),
-      axios.get("https://raw.githubusercontent.com/Saim-x69x/sakura/main/yfont.json"),
-      axios.get("https://raw.githubusercontent.com/Saim-x69x/sakura/main/category.json")
-    ]);
-    xfont = x.data;
-    yfont = y.data;
-    categoryEmoji = c.data;
-  } catch (e) {
-    console.error("[HELP] Resource load failed", e);
-    xfont = xfont || {};
-    yfont = yfont || {};
-    categoryEmoji = categoryEmoji || {};
-  }
-}
-
-function fontConvert(text, type = "command") {
-  const map = type === "category" ? xfont : yfont;
-  if (!map) return text;
-  return text.split("").map(c => map[c] || c).join("");
-}
-
-function getCategoryEmoji(cat) {
-  return categoryEmoji?.[cat.toLowerCase()] || "🗂️";
-}
-
-function roleText(role) {
-  const roles = { 0: "All Users", 1: "Group Admins", 2: "Bot Admin" };
-  return roles[role] || "Unknown";
-}
-
-function findCommand(name) {
-  name = name.toLowerCase();
-  for (const [, cmd] of commands) {
-    const a = cmd.config?.aliases;
-    if (cmd.config?.name === name) return cmd;
-    if (Array.isArray(a) && a.includes(name)) return cmd;
-    if (typeof a === "string" && a === name) return cmd;
-  }
-  return null;
-}
+const moment = require("moment-timezone");
 
 module.exports = {
   config: {
-    name: "help",
-    aliases: ["menu"],
-    version: "2.0",
-    author: "Saimx69x | fixed by Aphelion",
+    name: "info",
+    version: "2.5.3",
+    author: "MR_FARHAN",
     role: 0,
-    category: "info",
-    shortDescription: "Show all commands",
-    guide: "{pn} | {pn} <command> | {pn} -c <category>"
+    countDown: 20,
+    shortDescription: {
+      en: "Owner & bot information"
+    },
+    longDescription: {
+      en: "Show detailed information about the bot, owner, uptime and socials"
+    },
+    category: "owner",
+    guide: {
+      en: "{pn}"
+    }
   },
 
-  onStart: async function ({ message, args, event, role }) {
-    if (!xfont || !yfont || !categoryEmoji) await loadResources();
-    const prefix = getPrefix(event.threadID);
-    const input = args.join(" ").trim();
+  onStart: async function ({ message }) {
 
-    // Collect categories
-    const categories = {};
-    for (const [name, cmd] of commands) {
-      if (!cmd?.config || cmd.config.role > role) continue;
-      const cat = (cmd.config.category || "UNCATEGORIZED").toUpperCase();
-      if (!categories[cat]) categories[cat] = [];
-      categories[cat].push(name);
-    }
+    // OWNER INFO
+    const ownerName = "FARHAN-KHAN";
+    const ownerAge = "20+";
+    const ownerFB = "https://m.me/MR.MUNNA.220";
+    const ownerNumber = "01934640061";
+    const status = "Active";
 
-    // If input is "-c <category>"
-    if (args[0] === "-c" && args[1]) {
-      const cat = args[1].toUpperCase();
-      if (!categories[cat])
-        return message.reply(`❌ Category "${cat}" not found`);
+    // BOT INFO
+    const botName = global.GoatBot?.config?.nickNameBot || "GoatBot";
+    const prefix = global.GoatBot?.config?.prefix || ".";
+    const totalCommands = global.GoatBot?.commands?.size || 0;
 
-      let msg = `╭─────✰『 ${getCategoryEmoji(cat)} ${fontConvert(cat, "category")} 』\n`;
-      for (const c of categories[cat].sort())
-        msg += `│⚡ ${fontConvert(c)}\n`;
-      msg += `╰────────────✰\n`;
-      msg += `> TOTAL: ${categories[cat].length}\n> PREFIX: ${prefix}`;
-      return message.reply({
-        body: msg,
-        attachment: await getStreamFromURL(HELP_GIF)
-      });
-    }
+    // GIF / VIDEO URL
+    const images = [
+      "https://files.catbox.moe/rtgdvs.mp4"
+    ];
+    const image = images[Math.floor(Math.random() * images.length)];
 
-    // Main menu
-    if (!input) {
-      let msg = `╭───────❁\n│✨ 𝗙 𝗔 𝗥 𝗛 𝗔 𝗡 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧 ✨\n╰────────────❁\n`;
-      for (const cat of Object.keys(categories).sort()) {
-        msg += `╭─────✰『 ${getCategoryEmoji(cat)} ${fontConvert(cat, "category")} 』\n`;
-        for (const c of categories[cat].sort())
-          msg += `│⚡ ${fontConvert(c)}\n`;
-        msg += `╰────────────✰\n`;
-      }
-      const total = Object.values(categories).reduce((a, b) => a + b.length, 0);
-      msg += `╭─────✰[🌟 𝐄𝐍𝐉𝐎𝐘 🌟]\n│> TOTAL COMMANDS: [${total}]\n│\n│> TYPE: [ ${prefix}HELP <COMMAND> ]\n│\n│> FB.LINK: [https://m.me/MR.MUNNA.220]\n╰────────────✰\n`;
-      msg += `╭─────✰\n│ 💖 𝗦𝗜𝗭𝗨𝗞𝗔-𝗕𝗢𝗧 💖\n╰────────────✰`;
+    // DATE & TIME
+    const now = moment().tz("Asia/Dhaka");
+    const date = now.format("MMMM Do YYYY");
+    const time = now.format("h:mm:ss A");
 
-      return message.reply({
-        body: msg,
-        attachment: await getStreamFromURL(HELP_GIF)
-      });
-    }
+    // UPTIME
+    const uptime = process.uptime();
+    const days = Math.floor(uptime / 86400);
+    const hours = Math.floor((uptime % 86400) / 3600);
+    const minutes = Math.floor((uptime % 3600) / 60);
+    const seconds = Math.floor(uptime % 60);
+    const uptimeString = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-    // Command info
-    const cmd = findCommand(input);
-    if (!cmd) return message.reply(`❌ Command "${input}" not found`);
-    const c = cmd.config;
-    const aliasText = Array.isArray(c.aliases) ? c.aliases.join(", ") : c.aliases || "None";
-    let usage = "No usage";
-    if (c.guide) {
-      if (typeof c.guide === "string") usage = c.guide;
-      else if (typeof c.guide === "object") usage = c.guide.en || Object.values(c.guide)[0] || "No usage";
-      usage = usage.replace(/{pn}/g, `${prefix}${c.name}`);
-    }
-
-    const infoMsg = `
-╭─── COMMAND INFO ───╮
-🔹 Name : ${c.name}
-📂 Category : ${(c.category || "UNCATEGORIZED").toUpperCase()}
-📜 Description : ${c.longDescription || c.shortDescription || "N/A"}
-🔁 Aliases : ${aliasText}
-⚙️ Version : ${c.version || "1.0"}
-🔐 Permission : ${roleText(c.role)}
-⏱️ Cooldown : ${c.countDown || 5}s
-👑 Author : ${c.author || "Unknown"}
-📖 Usage : ${usage}
-╰───────────────────╯`;
-
+    // SEND MESSAGE
     return message.reply({
-      body: infoMsg,
-      attachment: await getStreamFromURL(HELP_GIF)
+      body: `⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
+‎    ╭•┄┅══❁🌺❁══┅┄•╮
+ •—»✨𝗢𝗪𝗡𝗘𝗥 𝗜𝗡𝗙𝗢✨«—•
+‎    ╰•┄┅══❁🌺❁══┅┄•╯
+‎⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
+‎╔══════════════════╗
+‎║👤>𝗢𝗪𝗡𝗘𝗥:-[𝗙𝗔𝗥𝗛𝗔𝗡-𝗞𝗛𝗔𝗡]
+║
+‎║♻️>𝗥𝗲𝗹𝗶𝗴𝗶𝗼𝗻:- [>𝗜𝘀𝗹𝗮𝗺<]
+‎║ 
+‎║📝>𝗔𝗴𝗲:-  [>𝟮𝟬<]
+‎║
+‎║🚻>𝗚𝗲𝗻𝗱𝗲𝗿:-  [>𝗠𝗮𝗹𝗲<]
+‎‎╠══════════════════╣
+‎║🌐>𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸:-↓
+‎║→fb.com/MR.MUNNA.220                           
+‎║
+‎║💬>𝗠𝗲𝘀𝘀𝗲𝗻𝗴𝗲𝗿:-↓
+‎║https://m.me/MR.MUNNA.220
+‎║
+‎║📞>𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽:-↓
+‎║→[>wa.me/+8801934640061<]        
+‎║
+‎╠══════════════════╣
+‎║>𝗕𝗢𝗧-𝗡𝗔𝗠𝗘:-𝗦𝗜𝗭𝗨𝗞𝗔-𝗕𝗔𝗕𝗬<
+‎║
+‎║⚡>𝗣𝗿𝗲𝗳𝗶𝘅:-『 ${prefix} 』
+‎║
+‎║📦>𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀:-『 𝟮𝟮𝟱 』
+‎║
+‎║🚀>𝗣𝗶𝗻𝗴:- N/A
+‎╠══════════════════╣
+‎║
+‎║⏳>𝗨𝗽𝘁𝗶𝗺𝗲:- ${uptimeString}
+‎║
+‎║🕒>𝗕𝗱→𝗧𝗶𝗺𝗲:-『 ${time} 』
+‎║
+║🗓>𝗗𝗮𝘁𝗲:-『 ${date} 』
+║
+‎╠══════════════════╣
+‎║🏠>𝐀𝐃𝐃𝐑𝐄𝐒𝐒:-[𝐂𝐇𝐔𝐀𝐃𝐀𝐍𝐆𝐀]
+‎║             [𝐁𝐀𝐍𝐆𝐋𝐀𝐃𝐄𝐒𝐇]
+‎║
+‎║👩‍❤️‍👨↓
+║ >𝐑𝐄𝐋𝐀𝐓𝐈𝐎𝐍𝐒𝐇𝐈𝐏:-[>𝐒𝐈𝐍𝐆𝐋𝐄<]
+‎║
+‎║🧑‍🔧>𝐖𝐎𝐑𝐊:- [>𝐉𝐎𝐁<]
+‎╠══════════════════╣
+‎⊱༅༎😽💚༅༎⊱ ]
+‎-আমি ভদ্র, বেয়াদব দুটোই🥱✌️
+‎
+‎-তুমি যেটা ডি'জার্ভ করো, আমি সেটাই দেখাবো! 
+⊱༅༎😽💚༅༎⊱ ]
+‎╠══════════════════╣
+  ‎♡𝗧𝗛𝗔𝗡𝗞𝗦 𝗙𝗢𝗥 𝗨𝗦𝗜𝗡𝗚 𝗠𝗬♡
+             ♡𝗦𝗜𝗭𝗨𝗞𝗔>𝗕𝗢𝗧♡
+‎╚══════════════════╝`,
+      attachment: await global.utils.getStreamFromURL(image)
     });
   }
 };
