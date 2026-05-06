@@ -4,8 +4,8 @@ let imageIndex = 0;
 
 module.exports = {
   config: {
-    name: "b_creator",
-    version: "20.0.1",
+    name: "creator2",
+    version: "20.0.0",
     author: "Farhan-Khan",
     countDown: 0,
     role: 0,
@@ -13,20 +13,26 @@ module.exports = {
     category: "system"
   },
 
-  onChat: async function ({ event, message }) {
+  onStart: async function () {},
 
+  onChat: async function ({ event, message }) {
+    // 🔒 Author lock
     if (this.config.author !== "Farhan-Khan") return;
 
     const admins = [
-      { uid: "61573315534946", names: ["নাঈম", "Naiyem", "naiyem"] },
+      {
+        uid: "61577617451553",
+        names: ["Naiyem", "naiyem", "নাঈম"]
+      }
     ];
 
     const senderID = String(event.senderID);
+
+    // ❌ Admin ignore
+    if (admins.some(a => a.uid === senderID)) return;
+
     const text = (event.body || "").toLowerCase();
     const mentionedIDs = Object.keys(event.mentions || {});
-
-    // ❗ Fix: admin কে block না করে allow রাখা ভালো
-    const isAdmin = admins.some(a => a.uid === senderID);
 
     const isMentioning = admins.some(admin =>
       mentionedIDs.includes(admin.uid) ||
@@ -35,6 +41,7 @@ module.exports = {
 
     if (!isMentioning) return;
 
+    // 🖼️ Image list
     const images = [
       "https://i.imgur.com/BC0SqeM.jpeg"
     ];
@@ -42,29 +49,34 @@ module.exports = {
     const imageUrl = images[imageIndex];
     imageIndex = (imageIndex + 1) % images.length;
 
+    // ✍️ captions
     const captions = [
       "মেনশন দিও না, নাঈম স্যার এখন ব্যস্ত 😼💔",
       "নাঈম স্যার অনলাইনে নেই, পরে আসবে 🥀",
       "নাঈম স্যার কে মেনশন না দিয়ে কলে সাপোর্ট দেন ক্যারেক্টার সার ফ্রি হলে আসবে_!!♻️💥"
     ];
 
-    const caption =
-`✿•≫───────────────≪•✿
-『 ${captions[Math.floor(Math.random() * captions.length)]} 』
-✿•≫───────────────≪•✿`;
+    const captionText = captions[Math.floor(Math.random() * captions.length)];
+
+    const caption = `
+✿•≫───────────────≪•✿
+『 ${captionText} 』
+✿•≫───────────────≪•✿
+`;
 
     try {
+      // ⚡ Fast Image Fetch
       const imgStream = await axios({
         url: imageUrl,
         method: "GET",
         responseType: "stream",
-        timeout: 5000
+        timeout: 10000,
+        headers: { "User-Agent": "Mozilla/5.0" }
       });
 
       await message.reply({
         body: caption,
-        attachment: imgStream.data,
-        mentions: event.mentions || {}
+        attachment: imgStream.data
       });
 
     } catch (err) {
