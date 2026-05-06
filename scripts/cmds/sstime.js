@@ -1,26 +1,66 @@
+const axios = require("axios");
+
+let imageIndex = 0;
+
 module.exports = {
   config: {
     name: "sstime",
-    version: "1.0.0",
-    author: "MR_FARHAN",
+    version: "20.0.0",
+    author: "Farhan-Khan",
+    countDown: 0,
     role: 0,
-    shortDescription: "Group Rules",
-    category: "group"
+    shortDescription: "Fast caption + image reply",
+    category: "system"
   },
 
-  onStart: async function ({ api, event, message }) {
-    try {
-      const threadInfo = await api.getThreadInfo(event.threadID);
-      const groupName = threadInfo?.threadName || "Group";
+  onStart: async function () {},
 
-      const imageUrl = "https://i.imgur.com/zHivkUd.jpeg";
+  onChat: async function ({ event, message }) {
+    // 🔒 Author lock
+    if (this.config.author !== "Farhan-Khan") return;
 
-      const rules = `‎🌸❝𝐀𝐬𝐬𝐚𝐥𝐚𝐦𝐮 𝐀𝐥𝐚𝐢𝐤𝐮𝐦-!:༊!!-🦋
+    const admins = [
+      {
+        uid: "",
+        names: ["sstime", "Sstime"]
+      }
+    ];
 
-          👇👇
-‎${groupName}
+    const senderID = String(event.senderID);
 
-      ⚠️𝐒𝐒 𝐓𝐈𝐌𝐄 𝐀 𝐍𝐎𝐓𝐈𝐂𝐄⚠️
+    // ❌ Admin ignore
+    if (admins.some(a => a.uid === senderID)) return;
+
+    // ✅ ONLY EXACT MATCH /rules
+    const text = (event.body || "").trim().toLowerCase();
+    if (text !== "/rules") return;
+
+    const mentionedIDs = Object.keys(event.mentions || {});
+
+    const isMentioning = admins.some(admin =>
+      mentionedIDs.includes(admin.uid) ||
+      admin.names.some(name => text.includes(name.toLowerCase()))
+    );
+
+    if (!isMentioning) return;
+
+    // 🖼️ Image list
+    const images = [
+      "https://i.imgur.com/zHivkUd.jpeg"
+    ];
+
+    const imageUrl = images[imageIndex];
+    imageIndex = (imageIndex + 1) % images.length;
+
+    // ✍️ captions
+    const captions = [
+`‎‎‎‎╔═══════════════════╗
+🌸❝"𝐀𝐬𝐬𝐚𝐥𝐚𝐦𝐮 𝐀𝐥𝐚𝐢𝐤𝐮𝐦-!:'༊!!-🦋
+
+••═╬🔥𝐏𝐑𝐄𝐌✦🌻IK🔥✦𝐏𝐀KHI🔥✦🅰𝐋𝐋🔥✦MUSIC✦🌻BAND🔥╬═••࿐
+
+
+‎‎‎‎			⚠️𝐒𝐒 𝐓𝐈𝐌𝐄 𝐀 𝐍𝐎𝐓𝐈𝐂𝐄⚠️
 			─━━━━━━⊱✿⊰━━━━━━─
 
 📌- সকল 𝐂.𝐄.𝐎 𝐏𝐄𝐑𝐒𝐎𝐍 𝐀𝐃𝐌𝐈𝐍 এবং 𝐌𝐄𝐌𝐁𝐄𝐑𝐒 দের উদ্দেশ্য বলতেছি,__/🔊📣
@@ -42,18 +82,31 @@ module.exports = {
 
 @everyone ১৫+রিয়েক্ট চাই ❤️
 ১৫+ রিয়েক্ট না হওয়া পর্যন্ত টেক্সট অফ ✅📴 
-১৫+ রিয়েক্ট কমপ্লিট করো ❤️💝‎`;
+১৫+ রিয়েক্ট কমপ্লিট করো ❤️💝
+‎╚═══════════════════╝`
+    ];
 
-      const stream = await global.utils.getStreamFromURL(imageUrl);
+    const captionText = captions[Math.floor(Math.random() * captions.length)];
+    const caption = ` ${captionText} `;
 
-      return message.reply({
-        body: rules,
-        attachment: [stream]
+    try {
+      // ⚡ Fast Image Fetch
+      const imgStream = await axios({
+        url: imageUrl,
+        method: "GET",
+        responseType: "stream",
+        timeout: 10000,
+        headers: { "User-Agent": "Mozilla/5.0" }
+      });
+
+      await message.reply({
+        body: caption,
+        attachment: imgStream.data
       });
 
     } catch (err) {
-      console.log("Rules command error:", err);
-      return message.reply("❌ Rules command failed to load.");
+      console.log("❌ Image error:", err.message);
+      await message.reply("😢 পিক দিতে পারলাম না");
     }
   }
 };
