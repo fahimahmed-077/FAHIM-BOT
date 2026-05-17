@@ -35,8 +35,8 @@ module.exports = {
     }
 
     const admins = [
-      { uid: "61589439339903", names: ["m ","im","Fm","ফম"] },
-      { uid: "61589976056816", names: ["mahi"] }
+      { uid: "61589439339903", names: ["Fahim ahmed","fahim","Fahim","ফাহিম"] },
+      { uid: "61589439339903", names: ["Fahim"] }
     ];
 
     const senderID = String(event.senderID);
