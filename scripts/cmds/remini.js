@@ -69,7 +69,7 @@ module.exports = {
       if (waitMsg?.messageID) message.unsend(waitMsg.messageID);
 
       message.reaction("❎", event.messageID);
-      message.reply(`🥹error baby, contact MahMUD.`);
+      message.reply(`🥹error baby, contact 𝐅𝐀𝐇𝐈𝐌.`);
     }
   }
 };
