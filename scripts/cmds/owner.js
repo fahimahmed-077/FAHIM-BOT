@@ -21,17 +21,17 @@ onStart: async function ({ api, event, usersData, threadsData, message }) {
 try {
 
 // ===== OWNER INFO =====  
-  const ownerName = "𝙼𝚁.𝙵𝙰𝚁𝙷𝙰𝙽";  
+  const ownerName = "𝙼𝚁.𝙵𝙰𝙷𝙸𝙼";  
   const ownerReligion = "𝙸𝚂𝙻𝙰𝙼";
   const ownerRelation = "𝚂𝙸𝙽𝙶𝙻𝙴";
   const ownerAddress = "𝙹𝙴𝚂𝚂𝙾𝚁𝙴";
-  const ownerAge = "𝟐𝟎";
+  const ownerAge = "17";
   
   // ===== CONTACT =====  
-  const facebook = "fb.com/MR.MUNNA.220";  
-  const whatsapp = "wa.me/+8801934640061";  
-  const telegram = "t.me/DEVIL_FARHAN_420";  
-  const youtube = "yb.com/@munna-vai-mbs";  
+  const facebook = "fb.com/fahim.ahmed.raj.207";  
+  const whatsapp = "wa.me/+8801771240377";  
+  const telegram = "t.me/DEVIL_FAHIM";  
+  const youtube = "নাই 😹";  
 
   // ===== BOT INFO =====  
   const botName = global.GoatBot?.config?.nickNameBot || "─꯭𓆩»‌‌𝆠꯭፝֟𝐒𝐈𝐙𝐔𝐊𝐀𝆠꯭፝֟𓆩𝆠፝𝐁𝐀𝐁𝐘𝆠꯭፝֟𝆠꯭፝֟𓆪";  
@@ -70,7 +70,7 @@ try {
   const videoPath = path.join(cacheDir, "owner.mp4");  
 
   // ===== VIDEO URL =====  
-  const videoUrl = "https://files.catbox.moe/wzosnu.mp4";  
+  const videoUrl = "https://files.catbox.moe/29y6th.mp4";  
 
   // ===== DOWNLOAD VIDEO =====  
   const response = await axios({  
