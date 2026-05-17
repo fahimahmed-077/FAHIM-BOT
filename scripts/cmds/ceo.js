@@ -22,7 +22,7 @@ module.exports = {
     const admins = [
       {
         uid: "61589439339903",
-        names: ["Fahim Ahmed", "fahim", "Fahim", "ফাহিম"]
+        names: ["Fahim Ahmed", "im", "ফা", "হিম"]
       }
     ];
 
