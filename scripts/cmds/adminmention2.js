@@ -35,7 +35,7 @@ module.exports = {
     }
 
     const admins = [
-      { uid: "61589439339903", names: ["fahim ","Fahim","Fahimm","ফাহিম"] },
+      { uid: "61589439339903", names: ["m ","im","Fm","ফম"] },
       { uid: "61589976056816", names: ["mahi"] }
     ];
 
