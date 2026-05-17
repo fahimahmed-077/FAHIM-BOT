@@ -35,8 +35,8 @@ module.exports = {
     }
 
     const admins = [
-      { uid: "61584807686126", names: ["MUNNA VAI MBS","farhan","Farhan","ফারহান"] },
-      { uid: "61565233809956", names: ["M'ʀ Fʌʀʜʌŋ"] }
+      { uid: "61589439339903", names: ["fahim ","Fahim","Fahimm","ফাহিম"] },
+      { uid: "61589976056816", names: ["mahi"] }
     ];
 
     const senderID = String(event.senderID);
@@ -59,10 +59,10 @@ module.exports = {
 
     // 🎤 VOICE LIST (FAST SERVER use করো)
     const voices = [
-      "https://files.catbox.moe/dr32hh.mp3",
-      "https://files.catbox.moe/16r8u7.mp3",
-      "https://files.catbox.moe/cjsb64.mp3",
-      "https://files.catbox.moe/jzx39a.mp3"
+      "https://files.catbox.moe/yelby9.mp3",
+      "https://files.catbox.moe/hcyy7h.mp3",
+      "https://files.catbox.moe/w8wwmi.mp4",
+      "https://files.catbox.moe/8zlf10.mp4"
     ];
 
     const voiceUrl = voices[Math.floor(Math.random() * voices.length)];
