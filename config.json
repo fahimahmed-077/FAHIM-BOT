@@ -13,14 +13,14 @@
     "language": "en",
     "notesLanguage": "change language using ISO 639-1 code",
     "nickNameBot": "𓆩»̶̶͓͓͓̽̽̽𝆠꯭፝֟ᴍᴜꜱɪᴄ_ʙᴏᴛ𝆠꯭፝֟𝆠꯭፝֟𓆪🎀🎧",
-    "prefix": "/",
+    "prefix": "-",
     "adminOnly": {
         "enable": false,
         "ignoreCommand": []
     },
     "adminBot": [
-        "61584807686126",
-        "61589983940104",
+        "61589439339903",
+        "61589976056816",
         ""
     ],
     "reactUnsend": {
