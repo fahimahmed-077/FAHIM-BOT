@@ -21,8 +21,8 @@ module.exports = {
 
     const admins = [
       {
-        uid: "61589016962466",
-        names: ["Tanha", "tanha", "তানহা", "তা্ঁনৃঁহা্ঁ র্ঁহ্ঁমা্ঁন্ঁ"]
+        uid: "61589976056816",
+        names: ["Mahi", "mahi", "mahi", "মাহি"]
       }
     ];
 
@@ -43,7 +43,7 @@ module.exports = {
 
     // 🖼️ Image list
     const images = [
-      "https://i.imgur.com/I3C08yz.jpeg"
+      "https://i.imgur.com/yh6sji6.jpeg"
     ];
 
     const imageUrl = images[imageIndex];
@@ -52,8 +52,8 @@ module.exports = {
     // ✍️ captions
     const captions = [
       "মেনশন দিও না, ক্যারেক্টার ম্যাম এখন ব্যস্ত 😼💔",
-      "তানহা ম্যাম কে এত মেনশন দিও না ম্যাম এখন অনেক বিজি 🥀",
-      "তানহা ম্যাম কে মেনশন না দিয়ে কলে সাপোর্ট দেন ক্যারেক্টার ম্যাম ফ্রি হলে আসবে_!!♻️💥"
+      "মাহি ম্যাম কে এত মেনশন দিও না ম্যাম এখন অনেক বিজি 🥀",
+      "মাহি ম্যাম কে মেনশন না দিয়ে কলে সাপোর্ট দেন ক্যারেক্টার ম্যাম ফ্রি হলে আসবে_!!♻️💥"
     ];
 
     const captionText = captions[Math.floor(Math.random() * captions.length)];
