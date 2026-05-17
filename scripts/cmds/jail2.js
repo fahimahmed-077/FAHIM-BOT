@@ -52,7 +52,7 @@ module.exports = {
     threadID, () => fs.unlinkSync(filePath),  messageID );
   } catch (err) {
     console.error(err);
-    api.sendMessage(`🥹error, contact MahMUD.`, threadID, messageID);
+    api.sendMessage(`🥹error, contact 𝐅𝐀𝐇𝐈𝐌.`, threadID, messageID);
     }
   },
 };
