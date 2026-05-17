@@ -21,8 +21,8 @@ module.exports = {
 
     const admins = [
       {
-        uid: "61567970123921",
-        names: ["乛 কিউ'ট ফারা'বি ːꜛᏯ࿐", "farhabi", "Farhabi", "ফারাবি"]
+        uid: "61589439339903",
+        names: ["Fahim Ahmed", "fahim", "Fahim", "ফাহিম"]
       }
     ];
 
@@ -43,7 +43,7 @@ module.exports = {
 
     // 🖼️ Image list
     const images = [
-      "https://i.imgur.com/safueRn.jpeg"
+      "https://i.imgur.com/wMLghrf.jpeg"
     ];
 
     const imageUrl = images[imageIndex];
