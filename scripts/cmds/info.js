@@ -22,10 +22,10 @@ module.exports = {
   onStart: async function ({ message }) {
 
     // OWNER INFO
-    const ownerName = "FARHAN-KHAN";
-    const ownerAge = "20+";
-    const ownerFB = "https://m.me/MR.MUNNA.220";
-    const ownerNumber = "01934640061";
+    const ownerName = "FAHIM-KHAN";
+    const ownerAge = "17+";
+    const ownerFB = "https://m.me/fahim.ahmed.raj.207";
+    const ownerNumber = "01771240377";
     const status = "Active";
 
     // BOT INFO
