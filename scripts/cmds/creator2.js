@@ -21,7 +21,7 @@ module.exports = {
 
     const admins = [
       {
-        uid: "61577617451553",
+        uid: "61577617321553",
         names: ["Naiyem", "naiyem", "নাঈম"]
       }
     ];
