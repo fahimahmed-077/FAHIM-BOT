@@ -29,7 +29,7 @@ module.exports.onStart = async function ({ api, event, args }) {
 
   if (!admins.includes(event.senderID)) {
     return api.sendMessage(
-      "❌ Only my boss farhan can use this command!",
+      "❌ Only my boss 𝐅𝐀𝐇𝐈𝐌 can use this command!",
       event.threadID,
       event.messageID
     );
