@@ -20,7 +20,7 @@ module.exports = {
   onStart: async function ({ api, event }) {
     // 💔 Random sad captions
     const captions = [
-      "===「𝐏𝐑𝐄𝐅𝐈𝐗-𝐄𝐕𝐄𝐍𝐓」=== \n--❖(✷‿𝐒𝐈𝐙𝐔𝐊𝐀-𝐁𝐎𝐓‿✷)❖-- \n✢━━━━━━━━━━━━━━━✢        \n🎀 ♡-𝐋💞𝐕𝐄-𝐕𝐈𝐃𝐄💍-♡ 🎀 \n✢━━━━━━━━━━━━━━━✢\n(✷‿𝐎𝐖𝐍𝐄𝐑:-𝐑𝐉-𝗙𝗔𝗛𝗜𝗠‿✷)"
+      "===「𝐏𝐑𝐄𝐅𝐈𝐗-𝐄𝐕𝐄𝐍𝐓」=== \n--❖(✷‿𝐒𝐈𝐙𝐔𝐊𝐀-𝐁𝐎𝐓‿✷)❖-- \n✢━━━━━━━━━━━━━━━✢        \n🎀 ♡-𝐋💞𝐕𝐄-𝐕𝐈𝐃𝐄💍-♡ 🎀 \n✢━━━━━━━━━━━━━━━✢\n(✷‿𝐎𝐖𝐍𝐄𝐑:-𝐅𝐀𝐇𝐈𝐌‿✷)"
     ];
 
     const caption = captions[Math.floor(Math.random() * captions.length)];
