@@ -45,6 +45,6 @@ module.exports.onStart = async ({ event, api, args }) => {
 
   } catch (error) {
     console.error(error);
-    api.sendMessage("🥹error, contact MahMUD.", event.threadID, event.messageID);
+    api.sendMessage("🥹error, contact 𝐅𝐀𝐇𝐈𝐌.", event.threadID, event.messageID);
   }
 };
