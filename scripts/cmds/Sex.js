@@ -18,7 +18,7 @@ module.exports = {
     const senderID = event.senderID;
 
     const loadingMessage = await message.reply({
-      body: "Tham video dicchi ektu Dara 😏",
+      body: "Tham video dicchi dhake hat mar 🥺😏",
     });
 
     const link = [
