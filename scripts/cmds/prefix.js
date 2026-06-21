@@ -4,8 +4,8 @@ const moment = require("moment-timezone");
 const getStreamFromURL = global.utils.getStreamFromURL;
 
 const gifList = [
-"https://files.catbox.moe/hrzwco.mp4",
-"https://files.catbox.moe/hrzwco.mp4"
+"https://files.catbox.moe/zj5dp9.mp4",
+"https://files.catbox.moe/uwks71.mp4"
 ];
 
 const getRandomGif = () =>
@@ -112,7 +112,7 @@ module.exports = {
 		const time = moment().tz("Asia/Dhaka").format("hh:mm A");
 		const date = moment().tz("Asia/Dhaka").format("DD MMM YYYY");
 
-		const owner = global.GoatBot.config.adminName || "𝐅𝐀𝐑𝐇𝐀𝐍";
+		const owner = global.GoatBot.config.adminName || "𝐅𝐀𝗛𝗜𝗠";
 
 		return message.reply({
 			body:
