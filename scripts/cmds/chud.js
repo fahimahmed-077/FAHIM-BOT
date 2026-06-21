@@ -19,7 +19,7 @@ let name =  event.mentions[mention];
 var arraytag = [];
 arraytag.push({id: mention, tag: name});
 var a = function (a) { api.sendMessage(a, event.threadID); }
-setTimeout(() => {a({body: "কিরে মাদারচোত ফারহান বস এর চুদন খাওয়ায় জন্য রেডি তো?" + "লে চুদা খা মাঙ্গের বেটা 😂😂" + name, mentions: arraytag})}, 3000);
+setTimeout(() => {a({body: "কিরে মাদারচোত ফাহিম বস এর চুদন খাওয়ায় জন্য রেডি তো?" + "লে চুদা খা মাঙ্গের বেটা 😂😂" + name, mentions: arraytag})}, 3000);
 setTimeout(() => {a({body: "মাঘি চুদা শরের বাচ্চা কার লগে পঙ্গা নিতে আসছিস 🤬🤬🤬" + " " + name, mentions: arraytag})}, 5000);
 setTimeout(() => {a({body: " চুদে গুহা ফাঁক করে দিব খানকীর পোলা 🤤" + " " + name, mentions: arraytag})}, 7000);
 setTimeout(() => {a({body: " মাদারচোত বোকাচোদা খানকীর পোলা " + " " + name, mentions: arraytag})}, 9000);
