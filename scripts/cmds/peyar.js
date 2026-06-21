@@ -36,13 +36,13 @@ module.exports.onStart = async function ({ api, event, args }) {
   if (args[0] == "off") {  
     delete data[event.threadID];  
     fs.writeFileSync(path, JSON.stringify(data, null, 2));  
-    return api.sendMessage("✅ ওকে বস ম্যাডাম কে আর ভালোবাসা দিমু না!", event.threadID);  
+    return api.sendMessage("✅ ওকে 𝗙𝗔𝗛𝗜𝗠 বস ম্যাডাম কে আর ভালোবাসা দিমু না!", event.threadID);  
   }  
   
   if (args[0] == "on") {  
   
     const mention = Object.keys(event.mentions)[0];  
-    if (!mention) return api.sendMessage("❌ বস একজনকে মেনশন করুন!", event.threadID);  
+    if (!mention) return api.sendMessage("❌ 𝗙𝗔𝗛𝗜𝗠 একজনকে মেনশন করুন!", event.threadID);  
   
     let name = event.mentions[mention];  
   
@@ -60,7 +60,7 @@ module.exports.onStart = async function ({ api, event, args }) {
     fs.writeFileSync(path, JSON.stringify(data, null, 2));  
   
     return api.sendMessage({  
-      body: `𓆩»${name}«𓆪\n এই ম্যাডাম আপনি SMS করলেই বস ফারহান এর পক্ষ থেকে হাজারো ভালোবাসা দিমু..😽😻`,  
+      body: `𓆩»${name}«𓆪\n এই ম্যাডাম আপনি SMS করলেই বস 𝗙𝗔𝗛𝗜𝗠 এর পক্ষ থেকে হাজারো ভালোবাসা দিমু..😽😻`,  
       mentions: [{  
         id: mention,  
         tag: name  
