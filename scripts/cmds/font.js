@@ -133,7 +133,7 @@ module.exports = {
 
 ╠━━❖ 🌸 𝗨𝗦𝗘 🌸 ❖━━╣    
 ┃ ➤ font list    
-┃ ➤ font 1 Farhan    
+┃ ➤ font 1 Fahim    
 ┃ ➤ reply + font 1    
 ╚━━━━━━━━━━━━━━━━━━╝`,
         event.threadID
