@@ -554,7 +554,7 @@ async function createWelcomeCard({
     pGrad.addColorStop(1, 'rgba(46,204,113,1)');
     ctx.fillStyle = pGrad;
     ctx.shadowColor = 'rgba(100,200,255,0.55)'; ctx.shadowBlur = 16;
-    ctx.fillText('Powered By Farhan', cx, cy + 8);
+    ctx.fillText('Powered By Fahim', cx, cy + 8);
     ctx.restore();
   }
 
