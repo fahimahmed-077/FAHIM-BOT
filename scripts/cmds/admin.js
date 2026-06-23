@@ -97,7 +97,7 @@ module.exports = {
 			case "remove":
 			case "-r": {
 				if (!isOwner)
-					return message.reply("❌ | Only my boss farhan can remove operator.");
+					return message.reply("❌ | Only my boss fahim can remove operator.");
 
 				let uids = [];
 
