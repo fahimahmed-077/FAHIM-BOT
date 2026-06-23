@@ -107,8 +107,8 @@ module.exports = {
       // Footer - Credits
       ctx.font = `italic bold ${Math.floor(canvas.height * 0.045)}px sans-serif`;
       ctx.fillStyle = "#00FF00"; 
-      ctx.strokeText("Power by:-Farhan Khan", startX, canvas.height - (lineSpacing * 1.1));
-      ctx.fillText("Power by:-Farhan Khan", startX, canvas.height - (lineSpacing * 1.1));
+      ctx.strokeText("Power by:-Fahim Khan", startX, canvas.height - (lineSpacing * 1.1));
+      ctx.fillText("Power by:-Fahim Khan", startX, canvas.height - (lineSpacing * 1.1));
 
       const buffer = canvas.toBuffer("image/png");
       fs.writeFileSync(imgPath, buffer);
