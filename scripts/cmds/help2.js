@@ -26,7 +26,7 @@ module.exports = {
     if (!args[0]) {
       // Group commands by category
       const categories = {};
-      let msg = "╭───────❁\n│✨ 𝗙 𝗔 𝗥 𝗛 𝗔 𝗡 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧 ✨\n╰────────────❁";
+      let msg = "╭───────❁\n│✨ 𝗙 𝗔 𝗛 𝗜 𝗠 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧 ✨\n╰────────────❁";
 
       for (const [name, value] of commands) {
         if (value.config.role > 1 && role < value.config.role) continue;
@@ -47,14 +47,14 @@ module.exports = {
       });
 
       const totalCommands = commands.size;
-      msg += `\n\n╭─────✰[🌟 𝐄𝐍𝐉𝐎𝐘 🌟]\n│> TOTAL COMMANDS: [${totalCommands}]\n│\n│> TYPE: [ ${prefix}HELP <COMMAND> ]\n│\n│> FB.LINK: [https://m.me/MR.MUNNA.220]\n╰────────────✰\n`;
-      msg += `\n╭─────✰\n│ 💖 𝗦𝗜𝗭𝗨𝗞𝗔-𝗕𝗢𝗧 💖\n╰────────────✰`; 
+      msg += `\n\n╭─────✰[🌟 𝐄𝐍𝐉𝐎𝐘 🌟]\n│> 𝗧𝗢𝗧𝗔𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦: [${totalCommands}]\n│\n│> 𝗧𝗜𝗣𝗘: [ ${prefix}𝗛𝗘𝗟𝗣 <𝗖𝗢𝗠𝗠𝗔𝗡𝗗> ]\n│\n│> 𝗙𝗕.𝗟𝗜𝗡𝗞: [𝗛𝗧𝗧𝗣𝗦://𝗠.𝗠𝗘/𝗙𝗔𝗛𝗜𝗠.𝗔𝗛𝗠𝗘𝗗.207]\n╰────────────✰\n`;
+      msg += `\n╭─────✰\n│ 💖 𝗙𝗔𝗛𝗜𝗠-𝗕𝗢𝗧 💖\n╰────────────✰`; 
 
       // Random help image
       const helpListImages = [
-        "https://files.catbox.moe/its4fz.jpg",
-        "https://files.catbox.moe/f6ca9r.jpg",
-        "https://files.catbox.moe/imgtqv.jpg"
+        "https://files.catbox.moe/uh4lxd.mp4",
+        "https://files.catbox.moe/zj5dp9.mp4",
+        "https://i.imgur.com/TqS7xxC.jpeg"
       ];
       const helpListImage = helpListImages[Math.floor(Math.random() * helpListImages.length)];
 
