@@ -88,7 +88,7 @@ module.exports = {
     ];
 
     activeMurgi.set(event.threadID, true);
-    message.reply("বস 𓆩𝐑𝐉 𝐅𝐀𝐑𝐇𝐀𝐍𓆪 এর চুদা লো-🖕🥵");
+    message.reply("বস 𓆩𝗙𝗔𝗛𝗜𝗠𓆪 এর চুদা লো-🖕🥵");
 
     try {
       while (activeMurgi.get(event.threadID)) {
