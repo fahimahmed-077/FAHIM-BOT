@@ -1,75 +1,64 @@
 const axios = require("axios");
-
-const mahmud = async () => {
-  const base = await axios.get("https://raw.githubusercontent.com/mahmudx7/HINATA/main/baseApiUrl.json");
-  return base.data.mahmud;
-};
-
-/**
-* @author MahMUD
-* @author: do not delete it
-*/
+const fs = require("fs-extra");
+const path = require("path");
+const FormData = require("form-data");
 
 module.exports = {
   config: {
     name: "4k",
-    version: "1.7",
-    author: "MahMUD",
-    countDown: 10,
+    aliases: ["upscale", "enhance"],
+    version: "1.0.0",
+    author: "Neoaz 🐦",
+    cooldown: 10,
     role: 0,
-    category: "AI",
-    description: "Enhance or restore image quality using 4k AI.",
-    guide: {
-      en: "{pn} [url] or reply with image"
-    }
+    description: "Upscale images to 4k quality",
+    category: "media",
+    usage: "4k (reply to an image)"
   },
 
-  onStart: async function ({ message, event, args }) {
-    
-    const obfuscatedAuthor = String.fromCharCode(77, 97, 104, 77, 85, 68); 
-    if (module.exports.config.author !== obfuscatedAuthor) {
-      return api.sendMessage("You are not authorized to change the author name.", event.threadID, event.messageID);
-    }
-    const startTime = Date.now();
-    let imgUrl;
+  onStart: async function ({ message, event, args, api }) {
+    let imageUrl = null;
 
-    if (event.messageReply?.attachments?.[0]?.type === "photo") {
-      imgUrl = event.messageReply.attachments[0].url;
+    if (event.type === "message_reply" && event.messageReply.attachments?.length > 0) {
+      const att = event.messageReply.attachments[0];
+      if (att.type === "photo") imageUrl = att.url;
+    } else if (args[0] && args[0].startsWith("http")) {
+      imageUrl = args[0];
     }
 
-    else if (args[0]) {
-      imgUrl = args.join(" ");
+    if (!imageUrl) {
+      return api.setMessageReaction("❌", event.messageID, () => {}, true);
     }
 
-    if (!imgUrl) {
-      return message.reply("Baby, Please reply to an image or provide an image URL");
-    }
-  
-    const waitMsg = await message.reply("𝐋𝐨𝐚𝐝𝐢𝐧𝐠 𝟒𝐤 𝐢𝐦𝐚𝐠𝐞...𝐰𝐚𝐢𝐭 𝐛𝐚𝐛𝐲 <😘");
-    message.reaction("😘", event.messageID);
+    api.setMessageReaction("⏳", event.messageID, () => {}, true);
 
     try {
-      
-      const apiUrl = `${await mahmud()}/api/hd?imgUrl=${encodeURIComponent(imgUrl)}`;
+      const form = new FormData();
+      form.append("scale", "16");
+      form.append("image", "");
+      form.append("image_url", imageUrl);
 
-      const res = await axios.get(apiUrl, { responseType: "stream" });
-      if (waitMsg?.messageID) message.unsend(waitMsg.messageID);
-
-      message.reaction("✅", event.messageID);
-
-      const processTime = ((Date.now() - startTime) / 1000).toFixed(2);
-
-      message.reply({
-        body: `✅ | 𝐇𝐞𝐫𝐞'𝐬 𝐲𝐨𝐮𝐫 𝟒𝐤 𝐢𝐦𝐚𝐠𝐞 𝐛𝐚𝐛𝐲`,
-        attachment: res.data
+      const response = await axios.post("https://nkximggen.onrender.com/api/enhance", form, {
+        headers: {
+          ...form.getHeaders(),
+          "accept": "application/json"
+        },
+        timeout: 300000
       });
 
-    } catch (error) {
-  
-      if (waitMsg?.messageID) message.unsend(waitMsg.messageID);
+      const upscaledUrl = response.data?.data?.[0]?.url;
+      if (!upscaledUrl) throw new Error("Upscale failed - no URL returned");
 
-      message.reaction("❎", event.messageID);
-      message.reply(`🥹error baby, contact MahMUD.`);
+      await message.reply({
+        body: "✅ | Image upscaled",
+        attachment: upscaledUrl
+      });
+
+      api.setMessageReaction("✅", event.messageID, () => {}, true);
+    } catch (error) {
+      console.error('4k error:', error.message);
+      api.setMessageReaction("❌", event.messageID, () => {}, true);
+      message.reply("❌ | Failed to upscale image.");
     }
   }
 };
